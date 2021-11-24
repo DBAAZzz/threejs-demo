@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第一个threejs文件创建WebGL三位场景</title>
+    <script src="./js/three/three.js"></script>
+    <script src="./js/three/OrbitControls.js"></script>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+
+<body>
+
+</body>
+
+<script>
+
+</script>
+
+<script>
+    // 创建场景对象Scene
+    var scene = new THREE.Scene()
+
+    // 创建透视摄像机
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+    // 创建一个渲染器
+    var renderer = new THREE.WebGLRenderer();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // renderer（渲染器）这个元素添加到我们的HTML文档中，这也就是渲染器使用<canvas>元素将场景展现给我们
+    document.body.appendChild(renderer.domElement)
+
+    var geometry = new THREE.BoxGeometry(1, 1, 1)
+    var material = new THREE.MeshBasicMaterial({
+        color: 0x4dffd6
+    })
+    var cube = new THREE.Mesh(geometry, material)
+
+    scene.add(cube);
+
+    camera.position.z = 5
+
+    function animate() {
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+
+
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    // 创建控件对象
+    var controls = new THREE.OrbitControls(camera, renderer.domsElement);
+
+    // 监听鼠标、键盘事件
+    controls.addEventListener('change', () => {
+        
+    });
+
+</script>
+
+</html>
